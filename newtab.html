@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AmitMarks</title>
+  <link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <!-- Video Background -->
+  <video id="video-bg" class="video-background" muted loop playsinline></video>
+
+  <div id="app">
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>AmitMarks</h1>
+          <div class="pages-list" id="pages-container">
+            <!-- Pages injected here -->
+          </div>
+          <button id="add-page-btn" class="btn btn-primary" style="white-space: nowrap;">+ New Page</button>
+        </div>
+        <div class="topbar-right">
+          <button id="battery-saver-btn" class="btn btn-ghost" style="white-space: nowrap; display: flex; align-items: center; gap: 6px; font-size: 13px;" title="Battery Saver Mode (Click to cycle Auto / Always ON / Always OFF)">🔋 Auto</button>
+          <button id="wallpapers-btn" class="btn btn-primary" style="white-space: nowrap;">Wallpapers</button>
+          <button id="add-board-btn" class="btn btn-primary" style="white-space: nowrap;">+ New Board</button>
+        </div>
+      </header>
+
+      <!-- Boards Container -->
+      <div id="boards-container" class="boards-container">
+        <!-- Boards will be injected here -->
+      </div>
+      <!-- Freeform Widgets -->
+      <div id="music-widget" class="widget" style="top: 250px; right: 40px;">
+        <div class="drag-handle">⋮⋮</div>
+        <div class="music-header">Ambient Player</div>
+        <div class="music-controls">
+          <select id="audio-select" class="music-select">
+            <option value="rain.ogg">Heavy Rain</option>
+            <option value="waves">Ocean Waves</option>
+            <option value="noise">Brown Noise</option>
+          </select>
+          <button id="play-btn" class="btn btn-ghost" style="padding: 4px 8px;">▶</button>
+        </div>
+        
+        <!-- Timer Controls -->
+        <div class="timer-controls">
+          <div class="timer-input-group">
+            <input type="number" id="timer-input" min="1" max="180" value="25" placeholder="Min" class="timer-input">
+            <span class="timer-unit">m</span>
+          </div>
+          <button id="timer-toggle-btn" class="btn btn-ghost" style="padding: 4px 8px;">⏱️</button>
+          <div id="timer-display" class="timer-display hidden">25:00</div>
+        </div>
+        
+        <audio id="ambient-audio" loop></audio>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal for Adding/Editing Items -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 id="modal-title">Add Item</h2>
+      <form id="modal-form">
+        <input type="hidden" id="modal-item-type">
+        <input type="hidden" id="modal-item-id">
+        <div class="form-group" id="group-title">
+          <label for="item-title">Title</label>
+          <input type="text" id="item-title" required autocomplete="off">
+        </div>
+        <div class="form-group" id="group-url" style="display:none;">
+          <label for="item-url">URL</label>
+          <input type="url" id="item-url" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Wallpaper Modal -->
+  <div id="wallpaper-modal" class="modal hidden">
+    <div class="modal-content" style="width: 600px; max-width: 90vw;">
+      <span class="close-btn" id="close-wallpaper-btn">&times;</span>
+      <h2 style="margin-bottom: 16px;">Select Wallpaper</h2>
+
+      <!-- Video Wallpaper Section -->
+      <div class="video-wp-section">
+        <h3 style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">🎬 Live Video Wallpaper</h3>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
+          <button id="pick-video-btn" class="btn btn-primary" style="white-space: nowrap; padding: 8px 16px;">📂 Choose from PC</button>
+          <span style="color: var(--text-secondary); font-size: 12px;">or</span>
+          <input type="text" id="video-url-input" placeholder="Paste MP4 URL..." style="flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-primary); font-size: 13px;">
+          <button id="set-video-wp-btn" class="btn btn-primary" style="white-space: nowrap; padding: 8px 16px;">Set URL</button>
+        </div>
+        <div style="display: flex; gap: 8px; margin-bottom: 16px; align-items: center;">
+          <span id="video-status" style="flex: 1; font-size: 12px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+          <button id="clear-video-wp-btn" class="btn btn-ghost" style="white-space: nowrap; padding: 6px 12px; font-size: 12px;">✕ Remove Video</button>
+        </div>
+        <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg" style="display: none;">
+      </div>
+
+      <h3 style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">🖼️ Image Wallpapers</h3>
+      <div class="wallpaper-grid" id="wallpaper-grid">
+        <!-- Wallpapers injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="sortable.min.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html>
